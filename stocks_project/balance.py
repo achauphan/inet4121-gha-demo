@@ -14,4 +14,5 @@ class Balance(object):
         self.balance = self.balance - amount
 
     def get_balance(self):
+        '''Return balance'''
         return self.balance
