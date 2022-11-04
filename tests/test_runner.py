@@ -7,7 +7,6 @@ if __name__ == '__main__':
     from test_sells import SellStockTest
 
     suite = unittest.TestSuite()
-    # suite = unittest.TestSuite( [suite1, suite2] ) 
     # no specific test runner to run, runs all   
     if len(sys.argv) == 1:
         suite1 = unittest.TestLoader().loadTestsFromTestCase(BuyStockTest)
