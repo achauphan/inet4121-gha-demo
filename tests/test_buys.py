@@ -38,9 +38,10 @@ class BuyStockTest(unittest.TestCase):
 		stks = Stocks()
 		self.assertRaises(ValueError, stks.buy, 'A', 1, -1)
 
-	def test_company_is_string(self):
+	def test_company_is_not_string(self):
 		stks = Stocks()
 		self.assertRaises(ValueError, stks.buy, 1, 1, -1)
+
 
 
 

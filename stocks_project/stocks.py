@@ -12,7 +12,7 @@ class Stocks(object):
 
     def buy(self, company, num_shares, unit_price):
         """Buy `num_shares` in 'company' at `unit_price` per share"""
-        if not isinstance(company, str) or len(company) == 0 or num_shares <= 0 or unit_price <= 0:
+        if (not isinstance(company, str)) or len(company) == 0 or num_shares <= 0 or unit_price <= 0:
             raise ValueError('Invalid parameters')
 
         total_cost = num_shares * unit_price
@@ -37,6 +37,9 @@ class Stocks(object):
         return basis
 
     def sell(self, company, num_shares):
+        if (not isinstance(company, str)) or (not isinstance(num_shares, int)) or num_shares < 0:
+            raise ValueError('Invald parameters')
+
         for stock in self.xacts:
             if stock[0] == company:
                 if stock[1] < num_shares:
@@ -47,8 +50,7 @@ class Stocks(object):
                 if stock[1] == 0:
                     self.xacts.remove(stock)
                 return
-        raise ValueError('No matching company found in portfolio')
-
+        raise ValueError('Cannot sell shares of an unowned company')
 
     def print_portfolio(self):
         print('Company,', 'Number Shares,', 'Share Price')
