@@ -1,0 +1,31 @@
+name: Repo Oush Pipeline
+run-name: ${{ github.actor }} started the Push Pipeline
+
+on:
+  push
+
+jobs:
+  # Job 1
+  run-test-runner:
+    # Runner instance OS
+    runs-on: ubuntu-latest
+    # Deploy container on top of runner instance
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      # - name: Set checked out repo as a safe git directory
+      #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+      - name: Fetch packages
+        run: | 
+          sudo apt-get -y update
+          sudo apt-get -y upgrade
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements_dev.txt
+      # - name: Build and run lorenz_96
+      #   uses: ./.github/actions/build_run_model 
+      #   with: 
+      #     model: lorenz_96
+      #     run-program: ./filter
+      #     use-mpi: true
+      #     mpi-n-tasks: 2
