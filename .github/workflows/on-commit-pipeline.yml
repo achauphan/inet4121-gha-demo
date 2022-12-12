@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          ./stocks-project
+          path: ./stocks-project
       # - name: Set checked out repo as a safe git directory
       #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
       - name: Fetch packages
