@@ -2,7 +2,7 @@ name: Repo Oush Pipeline
 run-name: ${{ github.actor }} started the Push Pipeline
 
 on:
-  push
+  [ push ] 
 
 jobs:
   # Job 1
@@ -26,7 +26,11 @@ jobs:
       - name: Run Test Runner
         run: |
           cd stocks_project
-          python3 tests/test_runner.py
+          coverage run --branch -m unittest -v tests/test_runner.py
+      - name: Generate Test Coverage Report with Branching
+        run: |
+          cd stocks_project
+          coverage report
       # - name: Build and run lorenz_96
       #   uses: ./.github/actions/build_run_model 
       #   with: 
