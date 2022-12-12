@@ -14,8 +14,9 @@ jobs:
       - name: Make top-level project directory
         run: mkdir stocks-project
       - name: Checkout repo
-        run: cd stocks-project
         uses: actions/checkout@v3
+        with:
+          ./stocks-project
       # - name: Set checked out repo as a safe git directory
       #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
       - name: Fetch packages
