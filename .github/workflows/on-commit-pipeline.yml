@@ -50,7 +50,7 @@ jobs:
       - name: Run Flake8 static analysis on source directory
         run: |
           cd stocks_project
-          flake8 -v --count stocks_project/
+          flake8 --count --exit-zero stocks_project/
       - name: Run PyLint static analysus on source directory
         run: |
           cd stocks_project
