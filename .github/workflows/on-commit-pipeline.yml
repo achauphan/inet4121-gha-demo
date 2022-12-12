@@ -19,12 +19,9 @@ jobs:
           path: ./stocks-project
       # - name: Set checked out repo as a safe git directory
       #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
-      - name: Fetch packages
-        run: | 
-          sudo apt-get -y update
-          sudo apt-get -y upgrade
       - name: Install dependencies
         run: |
+          cd stocks-project
           pip3 install -r requirements_dev.txt
       - name: Run Test Runner
         run: |
