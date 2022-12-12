@@ -2,7 +2,7 @@
 import unittest
 import sys
 sys.path.append('../stocks_project/')
-from stocks import Stocks
+from stocks_project.stocks import Stocks
 
 class BuyStockTest(unittest.TestCase):
 	def test_new_portfolio(self):
@@ -20,7 +20,7 @@ class BuyStockTest(unittest.TestCase):
 		stks.buy('GE', 10, 100.0)
 		self.assertEqual(stks.cost_basis(), 2000.0)
 
-# -------------------------------------------
+# -------------------------------------------------------
 
 	def test_buy_blank_company(self):
 		stks = Stocks()

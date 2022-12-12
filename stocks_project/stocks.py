@@ -1,4 +1,4 @@
-from balance import *
+from .balance import Balance
 
 class Stocks(object):
     """An in mem stock portfolio"""

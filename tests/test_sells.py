@@ -2,7 +2,8 @@
 import unittest
 import sys
 sys.path.append('../stocks_project/')
-from stocks import Stocks
+#from stocks import Stocks
+from stocks_project.stocks import Stocks
 
 class SellStockTest(unittest.TestCase):
 	def test_new_portfolio(self):
