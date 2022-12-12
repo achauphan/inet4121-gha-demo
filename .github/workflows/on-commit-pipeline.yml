@@ -12,11 +12,11 @@ jobs:
     # Deploy container on top of runner instance
     steps:
       - name: Make top-level project directory
-        run: mkdir stocks-project
+        run: mkdir stocks_project
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          path: ./stocks-project
+          path: ./stocks_project
       # - name: Set checked out repo as a safe git directory
       #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
       - name: Install dependencies
@@ -25,7 +25,7 @@ jobs:
           pip3 install -r requirements_dev.txt
       - name: Run Test Runner
         run: |
-          cd stocks-project
+          cd stocks_project
           python3 tests/test_runner.py
       # - name: Build and run lorenz_96
       #   uses: ./.github/actions/build_run_model 
