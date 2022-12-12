@@ -2,7 +2,9 @@ name: Repo Oush Pipeline
 run-name: ${{ github.actor }} started the Push Pipeline
 
 on:
-  [ push ] 
+  push:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
 
 jobs:
   # Job 1
@@ -31,10 +33,26 @@ jobs:
         run: |
           cd stocks_project
           coverage report
-      # - name: Build and run lorenz_96
-      #   uses: ./.github/actions/build_run_model 
-      #   with: 
-      #     model: lorenz_96
-      #     run-program: ./filter
-      #     use-mpi: true
-      #     mpi-n-tasks: 2
+
+  run-static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make top-level project directory
+        run: mkdir stocks_project
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          path: ./stocks_project
+      - name: Install dependencies
+        run: |
+          cd stocks_project
+          pip3 install -r requirements_dev.txt
+      - name: Run Flake8 static analysis on source directory
+        run: |
+          cd stocks_project
+          flake8 -v --count stocks_project/
+      - name: Run PyLint static analysus on source directory
+        run: |
+          cd stocks_project
+          pylint -v stocks_project/
+
