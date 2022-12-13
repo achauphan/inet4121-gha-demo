@@ -1,0 +1,58 @@
+name: Repo Oush Pipeline
+run-name: ${{ github.actor }} started the Push Pipeline
+
+on:
+  push:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
+
+jobs:
+  # Job 1
+  run-test-runner:
+    # Runner instance OS
+    runs-on: ubuntu-latest
+    # Deploy container on top of runner instance
+    steps:
+      - name: Make top-level project directory
+        run: mkdir stocks_project
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          path: ./stocks_project
+      # - name: Set checked out repo as a safe git directory
+      #   run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+      - name: Install dependencies
+        run: |
+          cd stocks_project
+          pip3 install -r requirements_dev.txt
+      - name: Run Test Runner
+        run: |
+          cd stocks_project
+          coverage run --branch -m unittest -v tests/test_runner.py
+      - name: Generate Test Coverage Report with Branching
+        run: |
+          cd stocks_project
+          coverage report
+
+  run-static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make top-level project directory
+        run: mkdir stocks_project
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          path: ./stocks_project
+      - name: Install dependencies
+        run: |
+          cd stocks_project
+          pip3 install -r requirements_dev.txt
+      - name: Run Flake8 static analysis on source directory
+        run: |
+          cd stocks_project
+          flake8 --count --exit-zero stocks_project/
+      - name: Run PyLint static analysus on source directory
+        run: |
+          cd stocks_project
+          pylint --exit-zero -v stocks_project/
+

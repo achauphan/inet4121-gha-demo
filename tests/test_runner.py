@@ -1,11 +1,10 @@
 # test_runner23.py
 import sys
 import unittest
-from test_buys import BuyStockTest
-from test_sells import SellStockTest
+from .test_buys import BuyStockTest
+from .test_sells import SellStockTest
 
 if __name__ == '__main__':
-
 
     suite = unittest.TestSuite()
     # no specific test runner to run, runs all   
