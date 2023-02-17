@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../stocks_project/')
 from .balance import Balance
 
 class Stocks(object):
